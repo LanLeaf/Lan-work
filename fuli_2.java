@@ -3,8 +3,8 @@ package fuli;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.NumberFormat;
 
+import java.text.NumberFormat;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,7 +22,6 @@ import org.dyno.visual.swing.layouts.Leading;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class fuli_2 extends JFrame {
-
 	private static final long serialVersionUID = 1L;
 	private JLabel jLabel0;
 	private JLabel jLabel1;
@@ -63,7 +62,7 @@ public class fuli_2 extends JFrame {
 	private JButton getJButton1() {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
-			jButton1.setText("È·¶¨");
+			jButton1.setText("ç¡®å®š");
 			jButton1.addMouseListener(new MouseAdapter() {
 	
 				public void mouseClicked(MouseEvent event) {
@@ -77,7 +76,7 @@ public class fuli_2 extends JFrame {
 	private JComboBox getJComboBox1() {
 		if (jComboBox1 == null) {
 			jComboBox1 = new JComboBox();
-			jComboBox1.setModel(new DefaultComboBoxModel(new Object[] { "¸´Àû¼ÆËã", "µ¥Àû¼ÆËã" }));
+			jComboBox1.setModel(new DefaultComboBoxModel(new Object[] { "å¤åˆ©è®¡ç®—", "å•åˆ©è®¡ç®—" }));
 			jComboBox1.setDoubleBuffered(false);
 			jComboBox1.setBorder(null);
 			jComboBox1.addMouseListener(new MouseAdapter() {
@@ -89,7 +88,7 @@ public class fuli_2 extends JFrame {
 	private JComboBox getJComboBox0() {
 		if (jComboBox0 == null) {
 			jComboBox0 = new JComboBox();
-			jComboBox0.setModel(new DefaultComboBoxModel(new Object[] { "ÖÕÖµ¼ÆËã", "±¾½ğ¼ÆËã" ,"ÄêÏŞ¼ÆËã","ÀûÏ¢¼ÆËã"}));
+			jComboBox0.setModel(new DefaultComboBoxModel(new Object[] { "ç»ˆå€¼è®¡ç®—", "æœ¬é‡‘è®¡ç®—" ,"å¹´é™è®¡ç®—","åˆ©æ¯è®¡ç®—"}));
 			jComboBox0.setDoubleBuffered(false);
 			jComboBox0.setBorder(null);
 			jComboBox0.addMouseListener(new MouseAdapter() {
@@ -129,7 +128,7 @@ public class fuli_2 extends JFrame {
 	private JLabel getJLabel3() {
 		if (jLabel3 == null) {
 			jLabel3 = new JLabel();
-			jLabel3.setText("ÖÕÖµ");
+			jLabel3.setText("ç»ˆå€¼");
 		}
 		return jLabel3;
 	}
@@ -137,7 +136,7 @@ public class fuli_2 extends JFrame {
 	private JButton getJButton4() {
 		if (jButton4 == null) {
 			jButton4 = new JButton();
-			jButton4.setText("È·¶¨");
+			jButton4.setText("ç¡®å®š");
 			jButton4.addMouseListener(new MouseAdapter() {
 	
 				public void mouseClicked(MouseEvent event) {
@@ -151,7 +150,7 @@ public class fuli_2 extends JFrame {
 	private JLabel getJLabel2() {
 		if (jLabel2 == null) {
 			jLabel2 = new JLabel();
-			jLabel2.setText("ÀûÂÊ");
+			jLabel2.setText("åˆ©ç‡");
 		}
 		return jLabel2;
 	}
@@ -190,7 +189,7 @@ public class fuli_2 extends JFrame {
 	private JLabel getJLabel1() {
 		if (jLabel1 == null) {
 			jLabel1 = new JLabel();
-			jLabel1.setText("ÄêÏŞ");
+			jLabel1.setText("å¹´é™");
 		}
 		return jLabel1;
 	}
@@ -198,7 +197,7 @@ public class fuli_2 extends JFrame {
 	private JLabel getJLabel0() {
 		if (jLabel0 == null) {
 			jLabel0 = new JLabel();
-			jLabel0.setText("±¾½ğ");
+			jLabel0.setText("æœ¬é‡‘");
 		}
 		return jLabel0;
 	}
@@ -226,7 +225,7 @@ public class fuli_2 extends JFrame {
 			public void run() {
 				fuli_2 frame = new fuli_2();
 				frame.setDefaultCloseOperation(fuli_2.EXIT_ON_CLOSE);
-				frame.setTitle("¸´Àû¡¢µ¥Àû¼ÆËã ");
+				frame.setTitle("å¤åˆ©ã€å•åˆ©è®¡ç®— ");
 				frame.getContentPane().setPreferredSize(frame.getSize());
 				frame.pack();
 				frame.setLocationRelativeTo(null);
@@ -235,10 +234,10 @@ public class fuli_2 extends JFrame {
 		});
 	}
 
-	//ÖÕÖµ£¬±¾½ğ
+	//ç»ˆå€¼ï¼Œæœ¬é‡‘
 	private void jButton1MouseMouseClicked(MouseEvent event) {
 
-		if (jComboBox0.getSelectedItem() == "ÖÕÖµ¼ÆËã") {
+		if (jComboBox0.getSelectedItem() == "ç»ˆå€¼è®¡ç®—") {
 			jPanel1 = new JPanel();
 			jTextField0 = new JTextField();
 			jTextField1 = new JTextField();
@@ -246,57 +245,57 @@ public class fuli_2 extends JFrame {
 			jTextField3 = new JTextField();
 
 		}
-		else if (jComboBox0.getSelectedItem() == "±¾½ğ¼ÆËã") {
+		else if (jComboBox0.getSelectedItem() == "æœ¬é‡‘è®¡ç®—") {
 			jPanel1 = new JPanel();
-			this.jLabel0.setText("ÖÕÖµ");
-			this.jLabel3.setText("±¾½ğ");
+			this.jLabel0.setText("ç»ˆå€¼");
+			this.jLabel3.setText("æœ¬é‡‘");
 		} 
-		else if (jComboBox0.getSelectedItem() == "ÄêÏŞ¼ÆËã") {
+		else if (jComboBox0.getSelectedItem() == "å¹´é™è®¡ç®—") {
 			jPanel1 = new JPanel();
-			this.jLabel0.setText("±¾½ğ");
-			this.jLabel1.setText("ÖÕÖµ");
-			this.jLabel3.setText("ÄêÏŞ");
+			this.jLabel0.setText("æœ¬é‡‘");
+			this.jLabel1.setText("ç»ˆå€¼");
+			this.jLabel3.setText("å¹´é™");
 		} 
-		else if (jComboBox0.getSelectedItem() == "ÀûÏ¢¼ÆËã") {
+		else if (jComboBox0.getSelectedItem() == "åˆ©æ¯è®¡ç®—") {
 			jPanel1 = new JPanel();
-			this.jLabel0.setText("±¾½ğ");
-			this.jLabel3.setText("ÀûÏ¢");
-			this.jLabel1.setText("ÄêÏŞ");
+			this.jLabel0.setText("æœ¬é‡‘");
+			this.jLabel3.setText("åˆ©æ¯");
+			this.jLabel1.setText("å¹´é™");
 		}
 	}
 	
 	private void jButton4MouseMouseClicked(MouseEvent event) {
-		NumberFormat currencyformatter = NumberFormat.getCurrencyInstance(); // ×Ö·û´®×ª»¯ÎªÊı×Ö
+		NumberFormat currencyformatter = NumberFormat.getCurrencyInstance(); // å­—ç¬¦ä¸²è½¬åŒ–ä¸ºæ•°å­—
 		double p = Double.parseDouble(jTextField0.getText());
 		double r = Double.parseDouble(jTextField1.getText());
 		double n = Double.parseDouble(jTextField2.getText());
 		double f=0;
-		if (jComboBox1.getSelectedItem() == "¸´Àû¼ÆËã") {
+		if (jComboBox1.getSelectedItem() == "å¤åˆ©è®¡ç®—") {
 			 
-			if (jComboBox0.getSelectedItem() == "ÖÕÖµ¼ÆËã") {
+			if (jComboBox0.getSelectedItem() == "ç»ˆå€¼è®¡ç®—") {
 				f = p * Math.pow((1 + 0.01*r),n);
 			} 
-			else if (jComboBox0.getSelectedItem() == "±¾½ğ¼ÆËã") {
+			else if (jComboBox0.getSelectedItem() == "æœ¬é‡‘è®¡ç®—") {
 				f = p/Math.pow((1+0.01*r), n);
 			} 
-			else if (jComboBox0.getSelectedItem() == "ÄêÏŞ¼ÆËã") {
+			else if (jComboBox0.getSelectedItem() == "å¹´é™è®¡ç®—") {
 				f=0;
 			}
-			else if (jComboBox0.getSelectedItem() == "ÀûÏ¢¼ÆËã") {
+			else if (jComboBox0.getSelectedItem() == "åˆ©æ¯è®¡ç®—") {
 				f=p * Math.pow((1 + 0.01*r),n)-1;
 			}
 		}
 		else {
-			if (jComboBox0.getSelectedItem() == "ÖÕÖµ¼ÆËã") {
+			if (jComboBox0.getSelectedItem() == "ç»ˆå€¼è®¡ç®—") {
 				f = p*(1+0.01*r*n);
 			}
-			else if (jComboBox0.getSelectedItem() == "±¾½ğ¼ÆËã") {
+			else if (jComboBox0.getSelectedItem() == "æœ¬é‡‘è®¡ç®—") {
 				f = p/(1+0.01*r*n);
 			} 
-			else if (jComboBox0.getSelectedItem() == "ÄêÏŞ¼ÆËã") {
+			else if (jComboBox0.getSelectedItem() == "å¹´é™è®¡ç®—") {
 				f=0;
 			}
-			else if (jComboBox0.getSelectedItem() == "ÀûÏ¢¼ÆËã") {
+			else if (jComboBox0.getSelectedItem() == "åˆ©æ¯è®¡ç®—") {
 				f=p*(1+0.01*r*n)-p;
 			}
 		}
