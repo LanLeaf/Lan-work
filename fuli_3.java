@@ -23,7 +23,6 @@ import org.dyno.visual.swing.layouts.Leading;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class fuli_3 extends JFrame {
-
     private static final long serialVersionUID = 1L;
     private JLabel jLabel0;
     private JLabel jLabel1;
