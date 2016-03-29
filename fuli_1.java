@@ -1,7 +1,5 @@
 package fuli;
-
 import java.util.Scanner;
-
 public class fui {
 	public static void main(String[] args){ 
 		double money,r;
