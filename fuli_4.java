@@ -2,7 +2,6 @@ package fuli_4;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
@@ -34,10 +33,10 @@ public class fuli_4 extends JFrame {
     private JLabel jLabel2;
     private JButton jButton4;
     private JLabel jLabel3;
-    private JTextField jTextField0;
-    private JTextField jTextField1;
-    private JTextField jTextField2;
-    private JTextField jTextField3;
+    JTextField jTextField0;
+    JTextField jTextField1;
+    JTextField jTextField2;
+    JTextField jTextField3;
     private static final MouseEvent event2 = null;
     private JComboBox jComboBox0;
     private JComboBox jComboBox1;
@@ -248,8 +247,8 @@ public class fuli_4 extends JFrame {
 			jPanel0.setBorder(new LineBorder(Color.red, 1, false));
 			jPanel0.setLayout(new GroupLayout());
 			jPanel0.add(getJComboBox0(), new Constraints(new Leading(14, 10, 10), new Leading(20, 10, 10)));
-			jPanel0.add(getJButton1(), new Constraints(new Leading(119, 10, 10), new Leading(19, 12, 12)));
 			jPanel0.add(getJPanel1(), new Constraints(new Leading(22, 261, 10, 10), new Leading(74, 264, 10, 10)));
+			jPanel0.add(getJButton1(), new Constraints(new Leading(155, 10, 10), new Leading(20, 12, 12)));
 		}
 		return jPanel0;
 	}
@@ -376,51 +375,59 @@ public class fuli_4 extends JFrame {
             this.jLabel1.setText("期限(月)");
         }
     }
-    
-    
+   
+    //计算
+    public void run(){
+		try {
+			double f = 0;
+			// 当输入值为空时，计算结果返回0
+			if (jTextField0.getText().equals("") || jTextField1.getText().equals("")|| jTextField2.getText().equals("")) {
+				jLabel5.setText("请输入>0的数字");
+				jLabel7.setText("请输入>0的数字");
+				jLabel8.setText("请输入>0的数字");
+				f = 0.0;
+			} else {
+				NumberFormat currencyformatter = NumberFormat.getCurrencyInstance(); // 字符串转化为数字
+				float p = Float.parseFloat(jTextField0.getText());
+				float r = Float.parseFloat(jTextField2.getText());
+				float n = Float.parseFloat(jTextField1.getText());
+				if (jComboBox1.getSelectedItem() == "复利计算") {
+					if (jComboBox0.getSelectedItem() == "终值计算") {
+						f = p * Math.pow((1 + 0.01 * r), n);
+					}
+					if (jComboBox0.getSelectedItem() == "本金计算") {
+						f = p / Math.pow((1 + 0.01 * r), n);
+					} else if (jComboBox0.getSelectedItem() == "年限计算") {
+						f = (Math.log(n / p)) / (Math.log(1 + 0.01 * r));
+					} else if (jComboBox0.getSelectedItem() == "利率计算") {
+						f = 100 * (Math.pow(r / p, 1d / n) - 1);
+					} else if (jComboBox0.getSelectedItem() == "基金定投") {
+						f = p * (1 + 0.01 * r) * (-1 + Math.pow(1 + 0.01 * r, n)) / (0.01 * r);
+					} else if (jComboBox0.getSelectedItem() == "等额本息还款") {
+						f = p * ((0.01 * r / 12) * Math.pow((1 + 0.01 * r / 12), n))
+								/ (Math.pow((1 + 0.01 * r / 12), n) - 1);
+					}
+				} else {
+					if (jComboBox0.getSelectedItem() == "终值计算") {
+						f = p * (1 + 0.01 * r * n);
+					} else if (jComboBox0.getSelectedItem() == "本金计算") {
+						f = p / (1 + 0.01 * r * n);
+					} else if (jComboBox0.getSelectedItem() == "年限计算") {
+						f = ((n / p) - 1) / (0.01 * r);
+					} else if (jComboBox0.getSelectedItem() == "利率计算") {
+						f = 100 * (((r / p) - 1) / n);
+					}
+				}
+			}
+			DecimalFormat df = new DecimalFormat("0.00");
+			String db = df.format(f);
+			jTextField3.setText(String.valueOf(db));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
     private void jButton4MouseMouseClicked(MouseEvent event) {
-        NumberFormat currencyformatter = NumberFormat.getCurrencyInstance(); // 字符串转化为数字
-        float p = Float.parseFloat(jTextField0.getText());
-        float r = Float.parseFloat(jTextField2.getText());
-        float n = Float.parseFloat(jTextField1.getText());
-        double f=0;
-        if (jComboBox1.getSelectedItem() == "复利计算") {
-             
-            if (jComboBox0.getSelectedItem() == "终值计算") {
-                f = p * Math.pow((1 + 0.01*r),n);
-            } 
-            else if (jComboBox0.getSelectedItem() == "本金计算") {
-                f = p/Math.pow((1+0.01*r), n);
-            } 
-            else if (jComboBox0.getSelectedItem() == "年限计算") {
-            	f = (Math.log(n/p))/(Math.log(1+0.01*r));
-            }
-            else if (jComboBox0.getSelectedItem() == "利率计算") {
-            	f = 100*( Math.pow(r/p,1d/n)-1);
-            }
-            else if (jComboBox0.getSelectedItem() == "基金定投") {
-            	f = p*(1+0.01*r)*(-1+Math.pow(1+0.01*r,n))/(0.01*r);
-            } 
-            else if (jComboBox0.getSelectedItem() == "等额本息还款") {
-            	f=p*((0.01*r/12)*Math.pow((1+0.01*r/12),n))/(Math.pow((1+0.01*r/12),n)-1);
-            }
-        }
-        else {
-            if (jComboBox0.getSelectedItem() == "终值计算") {
-                f = p*(1+0.01*r*n);
-            }
-            else if (jComboBox0.getSelectedItem() == "本金计算") {
-                f = p/(1+0.01*r*n);
-            } 
-            else if (jComboBox0.getSelectedItem() == "年限计算") {
-                f = ((n/p)-1)/(0.01*r);
-            }
-            else if (jComboBox0.getSelectedItem() == "利率计算") {
-                f = 100*(((r/p)-1)/n);
-            }
-        }
-        DecimalFormat df = new DecimalFormat("0.00"); 
-        String db = df.format(f);
-        jTextField3.setText(String.valueOf(db));
-    }
+    	run();
+    }   	
 }
