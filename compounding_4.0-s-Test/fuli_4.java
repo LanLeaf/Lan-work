@@ -2,7 +2,6 @@ package fuli_4;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
@@ -248,8 +247,8 @@ public class fuli_4 extends JFrame {
 			jPanel0.setBorder(new LineBorder(Color.red, 1, false));
 			jPanel0.setLayout(new GroupLayout());
 			jPanel0.add(getJComboBox0(), new Constraints(new Leading(14, 10, 10), new Leading(20, 10, 10)));
-			jPanel0.add(getJButton1(), new Constraints(new Leading(119, 10, 10), new Leading(19, 12, 12)));
 			jPanel0.add(getJPanel1(), new Constraints(new Leading(22, 261, 10, 10), new Leading(74, 264, 10, 10)));
+			jPanel0.add(getJButton1(), new Constraints(new Leading(155, 10, 10), new Leading(20, 12, 12)));
 		}
 		return jPanel0;
 	}
@@ -383,6 +382,9 @@ public class fuli_4 extends JFrame {
 			double f = 0;
 			// 当输入值为空时，计算结果返回0
 			if (jTextField0.getText().equals("") || jTextField1.getText().equals("")|| jTextField2.getText().equals("")) {
+				jLabel5.setText("请输入>0的数字");
+				jLabel7.setText("请输入>0的数字");
+				jLabel8.setText("请输入>0的数字");
 				f = 0.0;
 			} else {
 				NumberFormat currencyformatter = NumberFormat.getCurrencyInstance(); // 字符串转化为数字
