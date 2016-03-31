@@ -15,14 +15,28 @@ public class Test {
 	 	double f = fuli.init(100000,10,3);
 		 Assert.assertEquals(f, 134390, 3.0);
 	 }
-	//测试当输入值为空时，计算结果返回0.0
+	//测试当输入值为空时，计算结果提示请正确输入
 	@org.junit.Test
 	public void testReturn() {
 		fuli_4 fuli = new fuli_4();
 		boolean se = false;
 		fuli.run();
-		double f  = Double.parseDouble(fuli.jTextField3.getText());
-		if(f==0.00){
+		if(fuli.jLabel9.getText()=="请正确输入数据在执行运算"){
+			se = true;
+		}
+		assertEquals(true,se);
+	}
+	
+	//测试当输入值为0时，计算结果提示请正确输入
+	@org.junit.Test
+	public void testRun() {
+		fuli_4 fuli = new fuli_4();
+		boolean se = false;
+		fuli.jTextField0.setText("0");
+		fuli.jTextField1.setText("0");
+		fuli.jTextField2.setText("0");
+		fuli.run();
+		if(fuli.jLabel9.getText()=="请正确输入数据在执行运算"){
 			se = true;
 		}
 		assertEquals(true,se);
