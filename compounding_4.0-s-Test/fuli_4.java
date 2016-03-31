@@ -47,6 +47,7 @@ public class fuli_4 extends JFrame {
 	private JLabel jLabel5;
 	private JLabel jLabel7;
 	private JLabel jLabel8;
+	JLabel jLabel9;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 	public fuli_4() {
         initComponents();
@@ -58,6 +59,16 @@ public class fuli_4 extends JFrame {
         add(getJComboBox1(), new Constraints(new Leading(23, 10, 10), new Leading(19, 10, 10)));
         setSize(320, 449);
     }
+
+	private JLabel getJLabel9() {
+		if (jLabel9 == null) {
+			jLabel9 = new JLabel();
+			jLabel9.setText(null);
+			jLabel9.setFont(new   java.awt.Font("Dialog",   0,   11));   
+			jLabel9.setForeground(Color.red);
+		}
+		return jLabel9;
+	}
 
 	private JLabel getJLabel8() {
 		if (jLabel8 == null) {
@@ -272,6 +283,7 @@ public class fuli_4 extends JFrame {
 			jPanel1.add(getJLabel7(), new Constraints(new Leading(86, 168, 12, 12), new Leading(92, 10, 10)));
 			jPanel1.add(getJLabel8(), new Constraints(new Leading(86, 168, 12, 12), new Leading(137, 12, 12)));
 			jPanel1.add(getJLabel2(), new Constraints(new Leading(11, 12, 12), new Leading(70, 12, 12)));
+			jPanel1.add(getJLabel9(), new Constraints(new Leading(90, 160, 12, 12), new Leading(239, 12, 12)));
 		}
 		return jPanel1;
 	}
@@ -385,43 +397,61 @@ public class fuli_4 extends JFrame {
 				jLabel5.setText("请输入>0的数字");
 				jLabel7.setText("请输入>0的数字");
 				jLabel8.setText("请输入>0的数字");
-				f = 0.0;
+				jLabel9.setText("请正确输入数据在执行运算");
 			} else {
 				NumberFormat currencyformatter = NumberFormat.getCurrencyInstance(); // 字符串转化为数字
 				float p = Float.parseFloat(jTextField0.getText());
 				float r = Float.parseFloat(jTextField2.getText());
 				float n = Float.parseFloat(jTextField1.getText());
-				if (jComboBox1.getSelectedItem() == "复利计算") {
-					if (jComboBox0.getSelectedItem() == "终值计算") {
-						f = p * Math.pow((1 + 0.01 * r), n);
+				if (p <= 0) 
+				{
+					jLabel5.setText("请输入>0的数字");
+					jLabel9.setText("请正确输入数据在执行运算");
+				} 
+				if (n <= 0)
+				{
+					jLabel8.setText("请输入>0的数字");
+					jLabel9.setText("请正确输入数据在执行运算");
+				}
+				if (r <= 0) 
+				{
+					jLabel7.setText("请输入>0的数字");
+					jLabel9.setText("请正确输入数据在执行运算");
+				} 
+				if(p>0&&n>0&&r>0){
+					if (jComboBox1.getSelectedItem() == "复利计算") {
+						if (jComboBox0.getSelectedItem() == "终值计算") {
+							f = p * Math.pow((1 + 0.01 * r), n);
+						}
+						if (jComboBox0.getSelectedItem() == "本金计算") {
+							f = p / Math.pow((1 + 0.01 * r), n);
+						} else if (jComboBox0.getSelectedItem() == "年限计算") {
+							f = (Math.log(n / p)) / (Math.log(1 + 0.01 * r));
+						} else if (jComboBox0.getSelectedItem() == "利率计算") {
+							f = 100 * (Math.pow(r / p, 1d / n) - 1);
+						} else if (jComboBox0.getSelectedItem() == "基金定投") {
+							f = p * (1 + 0.01 * r) * (-1 + Math.pow(1 + 0.01 * r, n)) / (0.01 * r);
+						} else if (jComboBox0.getSelectedItem() == "等额本息还款") {
+							f = p * ((0.01 * r / 12) * Math.pow((1 + 0.01 * r / 12), n))
+									/ (Math.pow((1 + 0.01 * r / 12), n) - 1);
+						}
+					} else {
+						if (jComboBox0.getSelectedItem() == "终值计算") {
+							f = p * (1 + 0.01 * r * n);
+						} else if (jComboBox0.getSelectedItem() == "本金计算") {
+							f = p / (1 + 0.01 * r * n);
+						} else if (jComboBox0.getSelectedItem() == "年限计算") {
+							f = ((n / p) - 1) / (0.01 * r);
+						} else if (jComboBox0.getSelectedItem() == "利率计算") {
+							f = 100 * (((r / p) - 1) / n);
+						}
 					}
-					if (jComboBox0.getSelectedItem() == "本金计算") {
-						f = p / Math.pow((1 + 0.01 * r), n);
-					} else if (jComboBox0.getSelectedItem() == "年限计算") {
-						f = (Math.log(n / p)) / (Math.log(1 + 0.01 * r));
-					} else if (jComboBox0.getSelectedItem() == "利率计算") {
-						f = 100 * (Math.pow(r / p, 1d / n) - 1);
-					} else if (jComboBox0.getSelectedItem() == "基金定投") {
-						f = p * (1 + 0.01 * r) * (-1 + Math.pow(1 + 0.01 * r, n)) / (0.01 * r);
-					} else if (jComboBox0.getSelectedItem() == "等额本息还款") {
-						f = p * ((0.01 * r / 12) * Math.pow((1 + 0.01 * r / 12), n))
-								/ (Math.pow((1 + 0.01 * r / 12), n) - 1);
-					}
-				} else {
-					if (jComboBox0.getSelectedItem() == "终值计算") {
-						f = p * (1 + 0.01 * r * n);
-					} else if (jComboBox0.getSelectedItem() == "本金计算") {
-						f = p / (1 + 0.01 * r * n);
-					} else if (jComboBox0.getSelectedItem() == "年限计算") {
-						f = ((n / p) - 1) / (0.01 * r);
-					} else if (jComboBox0.getSelectedItem() == "利率计算") {
-						f = 100 * (((r / p) - 1) / n);
-					}
+
+					DecimalFormat df = new DecimalFormat("0.00");
+					String db = df.format(f);
+					jTextField3.setText(String.valueOf(db));
 				}
 			}
-			DecimalFormat df = new DecimalFormat("0.00");
-			String db = df.format(f);
-			jTextField3.setText(String.valueOf(db));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
