@@ -5,19 +5,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
@@ -75,9 +66,7 @@ public class fuli_6 extends JFrame {
         initComponents();
     }
 
-	private boolean dot = false;//true:已经有小数点  0:还没有小数点
-	
-    private void initComponents() {
+	private void initComponents() {
 		setLayout(new GroupLayout());
 		add(getJScrollPane1(), new Constraints(new Leading(414, 426, 10, 10), new Leading(357, 255, 10, 10)));
 		add(getJLabel11(), new Constraints(new Leading(421, 10, 10), new Leading(175, 10, 10)));
@@ -696,10 +685,12 @@ public class fuli_6 extends JFrame {
     	run();
     }
 
-    
-    String[][] num= new String[10][10];
+    String project;
+    String P;
+    String R;
+    String N;
+    String F;
     String db;
-    int i=0,j,t;
 	private JTextArea jTextArea0;
 	private JScrollPane jScrollPane1;
 	private JLabel jLabel13;
@@ -713,7 +704,6 @@ public class fuli_6 extends JFrame {
 	private void jButton0MouseMouseClicked(MouseEvent event) { 
 		
 		double f = 0;
-		i = t;
 		if (jTextField5.getText().equals("") || jTextField6.getText().equals("") || jTextField7.getText().equals("")) {
 			jLabel15.setText("请输入>0的数字");
 			jLabel16.setText("请输入>0的数字");
@@ -740,7 +730,7 @@ public class fuli_6 extends JFrame {
 			if (p > 0 && n > 0 && r > 0) {
 				if (jComboBox2.getSelectedItem() == "A项目") {
 					jTextArea0.setText("投资A项目:\n");
-					num[0][0] = "A项目";
+					project = "A项目";
 					for (int t = 1; t <= n; t++) {
 						f = p / Math.pow((1 + r), t);
 						DecimalFormat df = new DecimalFormat("0.00");
@@ -751,7 +741,7 @@ public class fuli_6 extends JFrame {
 				}
 				else if (jComboBox2.getSelectedItem() == "B项目") {
 					jTextArea0.setText("投资B项目:\n");
-					num[1][0] = "B项目";
+					project = "B项目";
 					for (int t = 1; t <= n; t++) {
 						f = p * (1 + r * t);
 						DecimalFormat df = new DecimalFormat("0.00");
@@ -761,7 +751,7 @@ public class fuli_6 extends JFrame {
 				} 
 				else if (jComboBox2.getSelectedItem() == "C项目") {
 					jTextArea0.setText("投资C项目:\n");
-					num[2][0] = "C项目";
+					project = "C项目";
 					for (int t = 1; t <= n; t++) {
 						f = p * (1 + r * t) + p * r;
 						DecimalFormat df = new DecimalFormat("0.00");
@@ -769,104 +759,111 @@ public class fuli_6 extends JFrame {
 						jTextArea0.append("第" + t + "年\t现值为 ：" + db + "\n");
 					}
 				}
-				num[i][1] = jTextField5.getText();
-				num[i][2] = jTextField6.getText();
-				num[i][3] = jTextField7.getText();
-				num[i][4] = String.valueOf(db);
-				i++;
-				t = i;
+				P = jTextField5.getText();
+				R = jTextField6.getText();
+				N = jTextField7.getText();
+				F = String.valueOf(db);
 			}
-			WriteFile();
+			try {
+				SQL_Insert();
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
 		}
 	}
-
-    
-    public void WriteFile(){
-        File newfile=new File("recoad.txt");
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(newfile);
-            OutputStreamWriter osw=new OutputStreamWriter(fos,"UTF-8");
-            BufferedWriter bw=new BufferedWriter(osw);
-    		for(i=0;i<3;i++)
-    		{
-    			for(j=0;j<6;j++)
-    			{
-    				if(num[i][j]==null)
-    					bw.write(" "+"\t");
-    				else
-    					bw.write(num[i][j]+"\t");
-    			}
-    		}
-            bw.close();
-            osw.close();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            // TODO 自动生成的 catch 块
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            // TODO 自动生成的 catch 块
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO 自动生成的 catch 块
-            e.printStackTrace();
-        }
-        
-    }
-    
-	public void ReadFile(){
-        File file1=new File("recoad.txt");
-        if(file1.exists()){
-            
-            try {
-                FileInputStream fis=new FileInputStream(file1);
-                InputStreamReader isr = new InputStreamReader(fis,"UTF-8");
-                BufferedReader br=new BufferedReader(isr);
-                
-                String line;
-                String output="项目名\t投入本金\t利息\t年限\t现值\n";
-                while((line=br.readLine())!=null){
-                	 output=output+line+"\r\n";
-                }
-                jTextArea0.setText(output);
-                              //先创建的后关闭，后创建的先关闭
-                br.close();
-                isr.close();
-                fis.close();
-            } catch (UnsupportedEncodingException e) {
-                // TODO 自动生成的 catch 块
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                // TODO 自动生成的 catch 块
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO 自动生成的 catch 块
-                e.printStackTrace();
-            }
-        }
-    } 
 	
-	private String SQLinsert(){
-	    String line = "";
-	    Connection conn=null;
-	    ResultSet rs=null;
-	    try {
-	        Class.forName("com.mysql.jdbc.Driver");
-	        conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/fuli","root","0000");
-	        String sql="SELECT * FROM fuli"+"insert fuli values('1','2','3','4','5')";
-	        Statement st=conn.createStatement();
-	        rs=st.executeQuery(sql);
-	        st.close();
-	        rs.close();
-	        conn.close();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    return line;
+	private void SQL_Insert() throws SQLException {
+
+		String url = "jdbc:mysql://localhost:3306/fuli";
+		String user = "root";
+		String pwd = "0000";
+
+		Connection conn = null;
+		Statement st = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(url, user, pwd);
+			st = conn.createStatement();
+
+			// 插入记录
+			st.addBatch("insert into fuli values('" + project + "','" + P + "','" + R + "','" + N + "','" + F + "')");
+
+			// 执行批处理
+			st.executeBatch();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (st != null) {
+					st.close();
+					st = null;
+				}
+				if (conn != null) {
+					conn.close();
+					conn = null;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void SQL_Show() throws SQLException {
+
+		String url = "jdbc:mysql://localhost:3306/fuli";
+		String user = "root";
+		String pwd = "0000";
+
+		Connection conn = null;
+		Statement st = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(url, user, pwd);
+			st = conn.createStatement();
+
+			// 查看表
+			String sql = "select * from fuli";    //要执行的SQL
+			ResultSet rs = st.executeQuery(sql);// 创建数据对象
+			jTextArea0.setText(null);
+			while (rs.next()) {
+				jTextArea0.append(rs.getString(1) + "\t");
+				jTextArea0.append(rs.getString(2) + "\t");
+				jTextArea0.append(rs.getString(3) + "\t");
+				jTextArea0.append(rs.getString(4) + "\t");
+				jTextArea0.append(rs.getString(5) + "\t");
+				jTextArea0.append("\n");
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (st != null) {
+					st.close();
+					st = null;
+				}
+				if (conn != null) {
+					conn.close();
+					conn = null;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	//投资项目及盈利状况
 	private void jButton2MouseMouseClicked(MouseEvent event) {
-		ReadFile();
+		try {
+			SQL_Show();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
 	}
 }
